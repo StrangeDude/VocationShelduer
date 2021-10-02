@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="590.0" minWidth="690.0" prefHeight="590.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.upc.vocationprojectpres.gui.controller.DashboardController">
+   <VBox layoutX="104.0" layoutY="67.0" prefHeight="373.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <AnchorPane minHeight="146.0" minWidth="800.0" prefHeight="146.0" prefWidth="690.0" />
+         <Region prefHeight="29.0" prefWidth="690.0" VBox.vgrow="ALWAYS" />
+         <TabPane prefHeight="570.0" prefWidth="690.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+           <tabs>
+             <Tab text="Requested">
+                  <content>
+                   
+                  </content>
+                  <content>
+                     <VBox fx:id="requestVBox" prefHeight="200.0" prefWidth="100.0" />
+                  </content>
+             </Tab>
+             <Tab text="Asigned">
+               <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+             </Tab>
+           </tabs>
+         </TabPane>
+      </children>
+   </VBox>
+</AnchorPane>
