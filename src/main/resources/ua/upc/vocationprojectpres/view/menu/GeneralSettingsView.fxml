@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="SettingsView" prefHeight="425.6" prefWidth="493.6" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.upc.vocationprojectpres.gui.controller.SettingsControler">
+    <Label alignment="CENTER" layoutX="240.0" layoutY="167.0" prefHeight="66.0" prefWidth="99.0" text=" Settings page" translateX="10" />
+</AnchorPane>

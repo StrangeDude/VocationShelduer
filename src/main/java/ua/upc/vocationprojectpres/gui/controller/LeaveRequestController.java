@@ -1,21 +1,11 @@
 package ua.upc.vocationprojectpres.gui.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
-import ua.upc.vocationprojectpres.model.NewRequest;
-import ua.upc.vocationprojectpres.model.Request;
-import ua.upc.vocationprojectpres.model.TestModel;
-import ua.upc.vocationprojectpres.model.Vocation;
-import ua.upc.vocationprojectpres.util.RequestWriter;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Date;
+import ua.upc.vocationprojectpres.gui.control.MultiDatePicker;
+import ua.upc.vocationprojectpres.test.TestModel;
 
 public class LeaveRequestController extends AbstractMenu {
 
@@ -40,31 +30,13 @@ public class LeaveRequestController extends AbstractMenu {
 
     @FXML
     public void initialize() {
+        System.out.println("LeaveReqquestController loaded");
+
 
     }
 
-    private LocalDate getStartDate() {
-        LocalDate date = startDatePicker.getValue();
-        return date;
+    public void testController() {
+        System.out.println("Controller is accesible");
     }
 
-    private LocalDate getEndDate() {
-        LocalDate date = endDatePicker.getValue();
-        return date;
-    }
-
-    private String getReasonText() {
-        return reasonText.getText();
-    }
-
-    public void createAction(ActionEvent event) throws IOException {
-        //TODO validate date
-        Vocation vocation = new Vocation(getStartDate(),getEndDate());
-        if (getReasonText()!=null) vocation.setReason(getReasonText());
-        System.out.println("Requester Name:" + this.model.getCurrentPerson().getFirstName());
-        NewRequest request = new NewRequest(vocation,this.model.getCurrentPerson());
-        this.model.setCurrentRequest(request);
-        model.writeRequest();
-        model.readRequest();
-    }
 }

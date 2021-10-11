@@ -1,9 +1,6 @@
 package ua.upc.vocationprojectpres.test;
 
 import javafx.scene.image.Image;
-import ua.upc.vocationprojectpres.model.Person;
-import ua.upc.vocationprojectpres.model.Request;
-import ua.upc.vocationprojectpres.model.Vocation;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

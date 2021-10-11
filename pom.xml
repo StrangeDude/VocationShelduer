@@ -58,6 +58,16 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.5.7.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.firebirdsql.jdbc</groupId>
+            <artifactId>jaybird-jdk15</artifactId>
+            <version>2.2.7</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -80,7 +90,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ua.upc.vocationprojectpres/ua.upc.vocationprojectpres.test.HelloApplication
+                            <mainClass>ua.upc.vocationprojectpres/ua.upc.vocationprojectpres.HelloApplication
                             </mainClass>
                         </configuration>
                     </execution>

@@ -1,13 +1,11 @@
 package ua.upc.vocationprojectpres.util;
 
-import ua.upc.vocationprojectpres.model.*;
+import ua.upc.vocationprojectpres.test.NewRequest;
+import ua.upc.vocationprojectpres.test.ProcessedRequest;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
 

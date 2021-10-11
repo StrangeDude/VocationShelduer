@@ -1,17 +1,16 @@
 package ua.upc.vocationprojectpres.util;
 
 import javafx.scene.image.Image;
-import ua.upc.vocationprojectpres.model.*;
+import ua.upc.vocationprojectpres.test.NewRequest;
+import ua.upc.vocationprojectpres.test.Person;
+import ua.upc.vocationprojectpres.test.Vocation;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 
 public class RequestReader {

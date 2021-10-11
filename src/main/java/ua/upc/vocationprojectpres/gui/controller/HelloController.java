@@ -1,24 +1,29 @@
 package ua.upc.vocationprojectpres.gui.controller;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import ua.upc.vocationprojectpres.model.*;
-import ua.upc.vocationprojectpres.test.GUITestDrive;
+import ua.upc.vocationprojectpres.test.Person;
+import ua.upc.vocationprojectpres.test.SideMenuItem;
+import ua.upc.vocationprojectpres.test.TestModel;
 
-import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.util.Objects;
+import java.util.*;
 
 public class HelloController extends AbstractMenu {
 
     @FXML
-    private TreeView<String> treeView;
+    private TreeView<SideMenuItem> treeView;
 
     @FXML
     private AnchorPane contentPane;
@@ -40,75 +45,83 @@ public class HelloController extends AbstractMenu {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.model = model;
-        setUpUser(model.getCurrentPerson());
-        setUpTreeView();
+        System.out.println("model inited");
+        treeViewInit();
+        System.out.println(model.getMenuItemMap().toString());
 
     }
 
+    @FXML
+    public void initialize() {
+        System.out.println("HelloController loaded");
+        //treeViewInit();
+        //System.out.println(model.getTestHello());
+    }
+
+    public void testTreeViewInit() {
+        TreeItem<String> root = new TreeItem<>();
+        //treeView.setRoot(root);
+        List<TreeItem<String>> treeItemList = new ArrayList<>();
+        TreeItem<String> itemOne = new TreeItem<>("Item one");
+        TreeItem<String> subItemOne = new TreeItem<>("subItem one");
+
+        itemOne.getChildren().add(subItemOne);
+        treeItemList.add(itemOne);
+        treeItemList.add(new TreeItem<>("test2"));
+        ObservableList<TreeItem<String>> treeItems = FXCollections.observableList(treeItemList);
+        root.getChildren().addAll(treeItems);
+        treeView.setShowRoot(false);
 
 
 
 
-    public void initialize()  {}
 
 
-    private void setUpTreeView() {
 
-        TreeItem<String> root, dashboard, calendar, users, settings, leaveRequest;
-        root = new TreeItem<>();
+    }
 
-        leaveRequest = makeBranch("LeaveRequest",root);
-        dashboard = makeBranch("Dashboard", root);
-        calendar = makeBranch("Calendar", root);
-        users = makeBranch("Users", root);
-        settings = makeBranch("Settings", root);
+    public void treeViewInit() {
+        Map<String, SideMenuItem> menuItems = model.getMenuItemMap();
+        TreeItem<SideMenuItem> root = new TreeItem<>();
+
+
+        SideMenuItem requsetLeaveMenu = menuItems.get("RequestLeaveView");
+        SideMenuItem addLeaveMenu = menuItems.get("AddLeaveView");
+        SideMenuItem dashboardMenu = menuItems.get("DashboardView");
+        SideMenuItem calendarMenu = menuItems.get("UsersView");
+        SideMenuItem generalSettingsMenu = menuItems.get("GeneralSettingsView");
+
+
+        TreeItem<SideMenuItem> leaveRequestRoot = createMenuTreeItem(root, new SideMenuItem("Leave request"));
+        createMenuTreeItem(leaveRequestRoot, requsetLeaveMenu);
+        createMenuTreeItem(leaveRequestRoot, addLeaveMenu);
+        createMenuTreeItem(root,dashboardMenu);
+        createMenuTreeItem(root,calendarMenu);
+        TreeItem<SideMenuItem> settingsRoot = createMenuTreeItem(root, new SideMenuItem("Settings"));
+        createMenuTreeItem(settingsRoot, generalSettingsMenu);
         treeView.setShowRoot(false);
         treeView.setRoot(root);
-        treeView.getSelectionModel().selectedItemProperty()
-                .addListener((v, oldValue, newValue) -> {
-                    System.out.println(newValue.getValue() + "View.fxml");
-                    //setLoadingDelay(4);
-                    switchPanel(newValue.getValue());
+
+        treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !newValue.isLeaf()) {
+                treeView.getSelectionModel().select(newValue.getChildren().get(0));
+            }
+            if (oldValue!= null
+                    && oldValue.getParent() != newValue
+                    && oldValue.getParent().getValue() != null
+                    && oldValue.getParent().isExpanded()
+                    && newValue.getParent() != oldValue.getParent()) { oldValue.getParent().setExpanded(false);}
+
+            if (newValue != null && newValue.isLeaf()) {
+
+            }
         });
-        treeView.getSelectionModel().select(dashboard);
-
     }
 
-    private TreeItem<String>  makeBranch(String title, TreeItem<String> parent) {
-        TreeItem<String> item = new TreeItem<>(title);
-        item.setExpanded(true);
-        parent.getChildren().add(item);
-        return item;
+    private TreeItem<SideMenuItem> createMenuTreeItem(TreeItem<SideMenuItem> rootItem, SideMenuItem child) {
+        TreeItem<SideMenuItem> childItem = new TreeItem<>(child);
+        rootItem.getChildren().add(childItem);
+        return childItem;
     }
-
-    private void switchPanel(String viewName) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ua/upc/vocationprojectpres/test/" + viewName + "View.fxml"));
-            Node node = loader.load();
-            loader.getController();
-            contentPane.getChildren().setAll(node);
-            AbstractMenu  menuController = loader.getController();
-            System.out.println(this.model.getCurrentPerson().getFirstName());
-            menuController.initModel(this.model);
-            /*contentPane.getChildren().setAll((Node)FXMLLoader.
-                    load(Objects.
-                            requireNonNull(getClass().
-                                    getResource("/ua/upc/vocationprojectpres/test/" + viewName + "View.fxml"))));*/
-            contentPane.setMinHeight(590);
-            contentPane.setMinWidth(690);
-        } catch (Exception ex) {ex.printStackTrace();}
-
-    }
-
-    private void setUpUser(Person person) {
-        //TODO User login logic
-        String fullCredentials = person.getFirstName() + " " + person.getSecondName();
-        nameLabel.setText(fullCredentials);
-        positionLabel.setText(person.getPosition());
-        imageSpace.setFill(new ImagePattern(person.getAvatar()));
-    }
-
-
 }
 

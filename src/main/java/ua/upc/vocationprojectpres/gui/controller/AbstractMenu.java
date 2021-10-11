@@ -1,6 +1,6 @@
 package ua.upc.vocationprojectpres.gui.controller;
 
-import ua.upc.vocationprojectpres.model.TestModel;
+import ua.upc.vocationprojectpres.test.TestModel;
 
 public class AbstractMenu {
     private TestModel model;

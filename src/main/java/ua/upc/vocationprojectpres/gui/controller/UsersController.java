@@ -1,7 +1,11 @@
 package ua.upc.vocationprojectpres.gui.controller;
 
-import ua.upc.vocationprojectpres.model.TestModel;
+import javafx.fxml.FXML;
 
 public class UsersController extends AbstractMenu {
 
+    @FXML
+    public void initialize() {
+        System.out.println("UserController loaded");
+    }
 }
