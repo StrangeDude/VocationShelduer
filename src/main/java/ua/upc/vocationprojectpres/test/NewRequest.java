@@ -9,12 +9,10 @@ public class NewRequest extends Request{
         super(vocation, requester);
     }
 
+    @Override
     public List<String> getRequestData() {
-        Person person = this.getRequester();
-        Vocation vocation = this.getVocation();
-        List<String> requestData = Arrays.asList(
-                person.getFirstName(),person.getSecondName(),person.getPosition(),person.getAvatar().getUrl(),
-                vocation.getType(),vocation.getStartDate().toString(),vocation.getEndDate().toString(),vocation.getReason());
-        return requestData;
+        return null;
     }
+
+
 }

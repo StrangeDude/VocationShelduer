@@ -10,10 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.StageStyle;
-import javafx.util.Pair;
+import ua.upc.vocationprojectpres.gui.control.DenyWithReasonDialog;
 import ua.upc.vocationprojectpres.gui.control.EditDialog;
-import ua.upc.vocationprojectpres.gui.control.LoginDialog;
 import ua.upc.vocationprojectpres.test.TestModel;
 
 import java.io.IOException;
@@ -81,12 +79,7 @@ public class DashboardController extends AbstractMenu{
 
     }
 
-    private HBox getRequestBox() {
-        if (hBoxIterator.hasNext()) {
-            return hBoxIterator.next();
-        }
-        return null;
-    }
+
 
     private DashboardController getParrentInstance() {
         return this;
@@ -112,12 +105,12 @@ public class DashboardController extends AbstractMenu{
         @FXML
         public void initialize() {
             System.out.println("RequestController loaded");
-            setButtonsActions();
+            registerActions();
 
             requestReason.setText("test");
         }
 
-        private void setButtonsActions() {
+        private void registerActions() {
             this.approveButton.setOnAction(this::approveButtonClicked);
             this.denyButton.setOnAction(this::denyButtonClicked);
             this.denyWithReasonButton.setOnAction(this::denyWithReasonClicked);
@@ -132,20 +125,22 @@ public class DashboardController extends AbstractMenu{
 
         private void denyButtonClicked (ActionEvent event) {
             System.out.println("Denyed");
-
+            deleteRequest(event);
         }
 
         private void denyWithReasonClicked (ActionEvent event) {
             System.out.println("Denyed with reason");
+            DenyWithReasonDialog dialog = new DenyWithReasonDialog();
+
+            //TODO Chainging vocation model to denyed
+            dialog.show();
+            deleteRequest(event);
         }
 
         private void editButtonClicked (ActionEvent event) {
             System.out.println("Edit");
-            String reason = "Test reason";
-            EditDialog dialog = new EditDialog("test");
-            dialog.initStyle(StageStyle.UTILITY);
+            EditDialog dialog = new EditDialog();
             dialog.show();
-
 
         }
 

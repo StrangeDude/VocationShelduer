@@ -1,20 +1,14 @@
 package ua.upc.vocationprojectpres.gui.controller;
 
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Side;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
+
+import javafx.scene.control.Label;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.ImagePattern;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
-import ua.upc.vocationprojectpres.test.Person;
 import ua.upc.vocationprojectpres.test.SideMenuItem;
 import ua.upc.vocationprojectpres.test.TestModel;
 
@@ -38,6 +32,9 @@ public class HelloController extends AbstractMenu {
     @FXML
     private Circle imageSpace;
 
+    @FXML
+    private BorderPane mainPane;
+
     private TestModel model;
 
     public void initModel(TestModel model) {
@@ -58,29 +55,9 @@ public class HelloController extends AbstractMenu {
         //System.out.println(model.getTestHello());
     }
 
-    public void testTreeViewInit() {
-        TreeItem<String> root = new TreeItem<>();
-        //treeView.setRoot(root);
-        List<TreeItem<String>> treeItemList = new ArrayList<>();
-        TreeItem<String> itemOne = new TreeItem<>("Item one");
-        TreeItem<String> subItemOne = new TreeItem<>("subItem one");
-
-        itemOne.getChildren().add(subItemOne);
-        treeItemList.add(itemOne);
-        treeItemList.add(new TreeItem<>("test2"));
-        ObservableList<TreeItem<String>> treeItems = FXCollections.observableList(treeItemList);
-        root.getChildren().addAll(treeItems);
-        treeView.setShowRoot(false);
 
 
-
-
-
-
-
-    }
-
-    public void treeViewInit() {
+    private void treeViewInit() {
         Map<String, SideMenuItem> menuItems = model.getMenuItemMap();
         TreeItem<SideMenuItem> root = new TreeItem<>();
 
@@ -88,19 +65,22 @@ public class HelloController extends AbstractMenu {
         SideMenuItem requsetLeaveMenu = menuItems.get("RequestLeaveView");
         SideMenuItem addLeaveMenu = menuItems.get("AddLeaveView");
         SideMenuItem dashboardMenu = menuItems.get("DashboardView");
-        SideMenuItem calendarMenu = menuItems.get("UsersView");
+        SideMenuItem calendarMenu = menuItems.get("CalendarView");
+        SideMenuItem usersMenu = menuItems.get("UsersView");
         SideMenuItem generalSettingsMenu = menuItems.get("GeneralSettingsView");
 
 
-        TreeItem<SideMenuItem> leaveRequestRoot = createMenuTreeItem(root, new SideMenuItem("Leave request"));
+        TreeItem<SideMenuItem> leaveRequestRoot = createMenuTreeItem(root, new SideMenuItem("LeaveRequestView"));
         createMenuTreeItem(leaveRequestRoot, requsetLeaveMenu);
         createMenuTreeItem(leaveRequestRoot, addLeaveMenu);
         createMenuTreeItem(root,dashboardMenu);
+        createMenuTreeItem(root, usersMenu);
         createMenuTreeItem(root,calendarMenu);
-        TreeItem<SideMenuItem> settingsRoot = createMenuTreeItem(root, new SideMenuItem("Settings"));
+        TreeItem<SideMenuItem> settingsRoot = createMenuTreeItem(root, new SideMenuItem("SettingsView"));
         createMenuTreeItem(settingsRoot, generalSettingsMenu);
         treeView.setShowRoot(false);
         treeView.setRoot(root);
+        System.out.println(addLeaveMenu.toString());
 
         treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isLeaf()) {
@@ -113,7 +93,7 @@ public class HelloController extends AbstractMenu {
                     && newValue.getParent() != oldValue.getParent()) { oldValue.getParent().setExpanded(false);}
 
             if (newValue != null && newValue.isLeaf()) {
-
+                mainPane.setCenter(newValue.getValue().getPane());
             }
         });
     }

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
-import ua.upc.vocationprojectpres.gui.control.MultiDatePicker;
 import ua.upc.vocationprojectpres.test.TestModel;
 
 public class LeaveRequestController extends AbstractMenu {

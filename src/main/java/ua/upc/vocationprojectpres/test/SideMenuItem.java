@@ -4,6 +4,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import ua.upc.vocationprojectpres.gui.controller.AbstractMenu;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class SideMenuItem {
@@ -42,7 +43,17 @@ public class SideMenuItem {
 
     @Override
     public String toString() {
-        return itemName;
+        //TODO Must return menu item name without view
+        String[] r = itemName.split("(?=\\p{Upper})");
+        StringBuilder name = new StringBuilder();
+        for (int i =0; i<r.length-1;i++) {
+            if (i+1<r.length) {
+                r[i+1] = r[i+1].toLowerCase();
+            }
+            name.append(" ").append(r[i]);
+        }
+
+        return name.toString();
     }
 
 

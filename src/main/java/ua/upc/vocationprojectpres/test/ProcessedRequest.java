@@ -44,7 +44,6 @@ public class ProcessedRequest extends Request{
         Person approver = this.getApprover();
         Vocation vocation = this.getVocation();
         return Arrays.asList(
-                requester.getFirstName(),requester.getSecondName(),requester.getPosition(),requester.getAvatar().getUrl(),
                 vocation.getType(),vocation.getStartDate().toString(),vocation.getEndDate().toString(),vocation.getReason(),
                 approver.getFirstName(),approver.getSecondName(), this.status.toString(), this.denyReason);
     }
