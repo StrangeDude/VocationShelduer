@@ -5,8 +5,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import ua.upc.vocationprojectpres.model.User;
+import ua.upc.vocationprojectpres.model.MainModel;
 
-public class UsersController extends AbstractMenu {
+public class UsersController implements MenuController {
 
 
     @FXML
@@ -35,11 +36,22 @@ public class UsersController extends AbstractMenu {
 
     @FXML
     private TableColumn<User, String> incativeRoleColumn;
+
+    private MainModel model;
+
+
     @FXML
     public void initialize() {
         System.out.println("UserController loaded");
         setActiveTableCellFactory();
 
+    }
+
+    public void initModel(MainModel model) {
+        if (this.model != null) {
+            throw new IllegalStateException("Model can only be initialized once");
+        }
+        this.model = model;
     }
 
     private void setActiveTableCellFactory() {

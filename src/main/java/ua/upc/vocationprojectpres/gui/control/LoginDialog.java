@@ -36,7 +36,7 @@ public class LoginDialog extends Dialog<Pair<String, String>> {
 
     private void setContent() {
         //Create the content using FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ua/upc/vocationprojectpres/view/dialog/edit-dialog-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dialog/edit-dialog-view.fxml"));
         loader.setController(this);
         try {
             getDialogPane().setContent(loader.load());

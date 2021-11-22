@@ -9,6 +9,8 @@
     <class>ua.upc.vocationprojectpres.entity.StaffEntity</class>
     <class>ua.upc.vocationprojectpres.entity.StaffmovementEntity</class>
     <class>ua.upc.vocationprojectpres.entity.UserEntity</class>
+    <class>ua.upc.vocationprojectpres.entity.VocationRequestEntity</class>
+    <class>ua.upc.vocationprojectpres.entity.VocationTypeEntity</class>
 
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.FirebirdDialect"/>
@@ -20,6 +22,7 @@
       <property name="hibernate.use_sql_comments" value="false"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.naming_strategy" value="org.hibernate.cfg.EJB3NamingStrategy"/>
+      <property name="hibernate.jdbc.time_zone" value="UTC"/>
     </properties>
 
   </persistence-unit>

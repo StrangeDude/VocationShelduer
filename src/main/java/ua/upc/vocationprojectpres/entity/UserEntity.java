@@ -9,9 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
-@SecondaryTable(name = "STAFFMOVEMENT",
-        pkJoinColumns = {@PrimaryKeyJoinColumn(name = "USER_ID",referencedColumnName = "USER_ID")}
-)
+
 public class UserEntity implements Serializable {
 
 
@@ -284,21 +282,20 @@ public class UserEntity implements Serializable {
 
     //connections
 
-    //staffmovement 1
-    /*
-    @Column(table = "STAFFMOVEMENT", name = "POSITION_ID")
-    private int positionId;
 
-    public Integer getPositionId() {
-        return positionId;
-    }
+    @ManyToOne
+    @JoinTable(
+            name = "STAFFMOVEMENT",
+            joinColumns = @JoinColumn(
+                    name = "USER_ID",
+                    referencedColumnName = "USER_ID"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "POSITION_ID",
+                    referencedColumnName = "ID"
+            )
+    )
 
-    public void setPositionId(Integer positionId) {
-        this.positionId = positionId;
-    }
-    */
-    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(table = "STAFFMOVEMENT", name = "POSITION_ID")
     private StaffEntity staff;
 
     public StaffEntity getStaff() {
@@ -309,19 +306,21 @@ public class UserEntity implements Serializable {
         this.staff = staff;
     }
 
+    //VocationRequest
 
-    /*
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    private StaffmovementEntity staffmovement;
 
-    public StaffmovementEntity getStaffmovement() {
-        return staffmovement;
+
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    Set<VocationRequestEntity> vocationRequestSet;
+
+    public Set<VocationRequestEntity> getVocationRequestSet() {
+        return vocationRequestSet;
     }
 
-    public void setStaffmovement(StaffmovementEntity staffmovement) {
-        this.staffmovement = staffmovement;
+    public void setVocationRequestSet(Set<VocationRequestEntity> vocationRequestSet) {
+        this.vocationRequestSet = vocationRequestSet;
     }
-    */
 
     //vocation 1
 
@@ -335,11 +334,6 @@ public class UserEntity implements Serializable {
     public void setVocationSet(Set<VocationEntity> vocationSet) {
         this.vocationSet = vocationSet;
     }
-
-
-    //GUI propertys
-
-
 
 
 }

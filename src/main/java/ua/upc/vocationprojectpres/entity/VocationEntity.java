@@ -2,7 +2,6 @@ package ua.upc.vocationprojectpres.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "VOCATION")
@@ -122,11 +121,5 @@ public class VocationEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
-
-
-    //Propertys
-
-
-
 
 }

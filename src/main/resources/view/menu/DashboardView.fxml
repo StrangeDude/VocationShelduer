@@ -30,7 +30,15 @@
                      </ScrollPane>
                   </content>
              </Tab>
-             <Tab text="Asigned" />
+               <Tab text="Assigned">
+                  <content>
+                     <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="690.0" style="-fx-pref-width: 30;">
+                        <content>
+                           <VBox fx:id="assignedVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="310.0" prefWidth="690.0" />
+                        </content>
+                     </ScrollPane>
+                  </content>
+               </Tab>
            </tabs>
          </TabPane>
       </children>

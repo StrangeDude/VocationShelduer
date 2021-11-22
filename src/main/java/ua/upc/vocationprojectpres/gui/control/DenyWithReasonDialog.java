@@ -27,7 +27,7 @@ public class DenyWithReasonDialog extends Dialog<String> {
     }
 
     private void setContent() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ua/upc/vocationprojectpres/view/dialog/deny-with-reason-dialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/dialog/deny-with-reason-dialog.fxml"));
         loader.setController(this);
         try {
             getDialogPane().setContent(loader.load());

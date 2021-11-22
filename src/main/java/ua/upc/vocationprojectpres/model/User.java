@@ -1,32 +1,53 @@
 package ua.upc.vocationprojectpres.model;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import ua.upc.vocationprojectpres.entity.StaffEntity;
 import ua.upc.vocationprojectpres.entity.UserEntity;
+import ua.upc.vocationprojectpres.service.UserService;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class User {
 
+    private final ReadOnlyIntegerProperty id;
     private final ReadOnlyStringProperty name;
-    private final ReadOnlyIntegerProperty activeInUPC;
     private final ReadOnlyStringProperty login;
     private final ReadOnlyStringProperty email;
     private final ReadOnlyStringProperty intPhone;
     private final ReadOnlyStringProperty mobPhone;
-    //private final ReadOnlyStringProperty position;
-    //private final ReadOnlyStringProperty departament;
+    private final ReadOnlyIntegerProperty acitvity;
+    private final ObjectProperty<Position> position = new SimpleObjectProperty<>();
+    private final ObservableList<Vocation> vocations = FXCollections.observableArrayList();
 
-    public User(UserEntity user) {
-        name = new SimpleStringProperty(user.getName());
-        activeInUPC = new SimpleIntegerProperty(user.getActiveInUpc());
-        login = new SimpleStringProperty(user.getUserLogin());
-        email = new SimpleStringProperty(user.getUseremail());
-        intPhone = new SimpleStringProperty(user.getIntphone());
-        mobPhone = new SimpleStringProperty(user.getMobphone());
+    public User(
+                int id,
+                String name,
+                int activeInUPC,
+                String login,
+                String email,
+                String intPhone,
+                String mobPhone
+                ) {
+        this.id = new SimpleIntegerProperty(id);
+        this.acitvity = new SimpleIntegerProperty(activeInUPC);
+        this.name = new SimpleStringProperty(name);
+        this.login = new SimpleStringProperty(login);
+        this.email = new SimpleStringProperty(email);
+        this.intPhone = new SimpleStringProperty(intPhone);
+        this.mobPhone = new SimpleStringProperty(mobPhone);
+    }
 
-        //StaffEntity userStaff = user.getStaffmovement().getStaff();
 
-        //position = new SimpleStringProperty(userStaff.getUpcPosition());
-        //departament = new SimpleStringProperty(userStaff.getDepartment());
+    public int getId() {
+        return id.get();
+    }
+
+    public ReadOnlyIntegerProperty idProperty() {
+        return id;
     }
 
     public String getName() {
@@ -35,14 +56,6 @@ public class User {
 
     public ReadOnlyStringProperty nameProperty() {
         return name;
-    }
-
-    public int getActiveInUPC() {
-        return activeInUPC.get();
-    }
-
-    public ReadOnlyIntegerProperty activeInUPCProperty() {
-        return activeInUPC;
     }
 
     public String getLogin() {
@@ -77,21 +90,41 @@ public class User {
         return mobPhone;
     }
 
-    /*public String getPosition() {
+    public int getAcitvity() {
+        return acitvity.get();
+    }
+
+    public ReadOnlyIntegerProperty acitvityProperty() {
+        return acitvity;
+    }
+
+    public Position getPosition() {
         return position.get();
     }
 
-    public ReadOnlyStringProperty positionProperty() {
+    public ObjectProperty<Position> positionProperty() {
         return position;
     }
 
-    public String getDepartament() {
-        return departament.get();
+    public void setPosition(Position position) {
+        this.position.set(position);
     }
 
-    public ReadOnlyStringProperty departamentProperty() {
-        return departament;
+    public void addVocation(Vocation vocation) {
+        vocations.add(vocation);
     }
 
-     */
+    public void addAllVocaitons(Vocation... vocations) {
+        this.vocations.addAll(vocations);
+    }
+
+    public ObservableList<Vocation> getVocationList() {
+        return vocations;
+    }
+
+    @Override
+    public String toString() {
+        return this.name.get();
+    }
+
 }

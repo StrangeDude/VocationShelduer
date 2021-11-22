@@ -1,25 +1,20 @@
 package ua.upc.vocationprojectpres.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "VOCATION_REQUEST")
-public class VocationRequestEntity {
-
+public class VocationRequestEntity implements Serializable {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-
-    @Column(name = "USER_ID")
-    private int userId;
-
-    @Column(name = "START_DATE")
+    @Column(name = "START_DATE",nullable = true)
     private Date startDate;
 
-    @Column(name = "END_DATE")
+    @Column(name = "END_DATE",nullable = true)
     private Date endDate;
 
     @Column(name = "VOCATION_TYPE")
@@ -37,7 +32,7 @@ public class VocationRequestEntity {
     @Column(name = "DENY_REASON", length = 250)
     private String denyReason;
 
-    @Column(name = "APPROVE_DATE", nullable = false)
+    @Column(name = "APPROVE_DATE", nullable = true)
     private Date approveDate;
 
     public int getId() {
@@ -46,14 +41,6 @@ public class VocationRequestEntity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Date getStartDate() {
@@ -118,5 +105,17 @@ public class VocationRequestEntity {
 
     public void setApproveDate(Date approveDate) {
         this.approveDate = approveDate;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    UserEntity user;
+
+    public UserEntity getUserEntity() {
+        return user;
+    }
+
+    public void setUserEntity(UserEntity user) {
+        this.user = user;
     }
 }

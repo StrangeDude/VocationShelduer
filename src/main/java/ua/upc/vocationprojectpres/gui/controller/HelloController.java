@@ -9,12 +9,12 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
-import ua.upc.vocationprojectpres.test.SideMenuItem;
-import ua.upc.vocationprojectpres.test.TestModel;
+import ua.upc.vocationprojectpres.SideMenuItem;
+import ua.upc.vocationprojectpres.model.MainModel;
 
 import java.util.*;
 
-public class HelloController extends AbstractMenu {
+public class HelloController implements MenuController {
 
     @FXML
     private TreeView<SideMenuItem> treeView;
@@ -35,30 +35,31 @@ public class HelloController extends AbstractMenu {
     @FXML
     private BorderPane mainPane;
 
-    private TestModel model;
+    private MainModel model;
 
-    public void initModel(TestModel model) {
+
+
+
+    public void initModel(MainModel model) {
         if (this.model != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.model = model;
-        System.out.println("model inited");
-        treeViewInit();
-        System.out.println(model.getMenuItemMap().toString());
+        //System.out.println("model inited");
+        treeViewInit(model.getMenuItemMap());
 
     }
 
     @FXML
     public void initialize() {
         System.out.println("HelloController loaded");
-        //treeViewInit();
-        //System.out.println(model.getTestHello());
+
+
     }
 
 
 
-    private void treeViewInit() {
-        Map<String, SideMenuItem> menuItems = model.getMenuItemMap();
+    private void treeViewInit(Map<String, SideMenuItem> menuItems) {
         TreeItem<SideMenuItem> root = new TreeItem<>();
 
 

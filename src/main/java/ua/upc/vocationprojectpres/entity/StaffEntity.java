@@ -5,12 +5,12 @@ import ua.upc.vocationprojectpres.model.User;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "STAFF")
-
 
 public class StaffEntity implements Serializable {
 
@@ -194,6 +194,24 @@ public class StaffEntity implements Serializable {
         this.shortPosition = shortPosition;
     }
 
+
+
+    //User
+    //Staffmovement
+
+
+
+    @OneToMany(mappedBy = "staff",fetch = FetchType.LAZY)
+    private Set<UserEntity> userEntitySet;
+
+    public Set<UserEntity> getUserEntitySet() {
+        return userEntitySet;
+    }
+
+    public void setUserEntitySet(Set<UserEntity> userEntitySet) {
+        this.userEntitySet = userEntitySet;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID",referencedColumnName = "ID")
     public StaffEntity parent;
@@ -208,44 +226,26 @@ public class StaffEntity implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID",referencedColumnName = "ID")
-    public Set<StaffEntity> childs;
+    public Set<StaffEntity> children;
 
     public Set<StaffEntity> getChilds() {
-        return childs;
+        return children;
+    }
+
+    public Set<StaffEntity> getAllChilds() {
+
+            Set<StaffEntity> descendants = new HashSet<>();
+            for (StaffEntity child : children) {
+                if (!child.equals(child.getParent())) {
+                    descendants.add(child);
+                    descendants.addAll(child.getAllChilds());
+                }
+            }
+            return descendants;
+
     }
 
     public void setChilds(Set<StaffEntity> childs) {
-        this.childs = childs;
+        this.children = childs;
     }
-
-    //Staffmovement
-
-    @OneToMany(mappedBy = "staff",fetch = FetchType.LAZY)
-    private Set<UserEntity> userEntitySet;
-
-    public Set<UserEntity> getUserEntitySet() {
-        return userEntitySet;
-    }
-
-    public void setUserEntitySet(Set<UserEntity> userEntitySet) {
-        this.userEntitySet = userEntitySet;
-    }
-
-
-
-    /*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StaffEntity staff = (StaffEntity) o;
-        return id == staff.id && parentId == staff.parentId && Objects.equals(direction, staff.direction) && Objects.equals(department, staff.department) && Objects.equals(upcPosition, staff.upcPosition) && Objects.equals(positionCreated, staff.positionCreated) && Objects.equals(positionClosed, staff.positionClosed) && Objects.equals(hayLevel, staff.hayLevel)  && Objects.equals(costCenter, staff.costCenter) && Objects.equals(empJobTitle, staff.empJobTitle) && Objects.equals(empBoardLevel, staff.empBoardLevel) && Objects.equals(orgName, staff.orgName) && Objects.equals(orgType, staff.orgType) && Objects.equals(shortPosition, staff.shortPosition);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, parentId, direction, department, upcPosition, positionCreated, positionClosed, hayLevel, costCenter, empJobTitle, empBoardLevel, orgName, orgType, shortPosition);
-    }
-
-     */
 }

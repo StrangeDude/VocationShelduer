@@ -71,34 +71,16 @@ public class StaffmovementEntity implements Serializable {
         this.finishOnPosition = finishOnPosition;
     }
 
-    //Connections
-    /*
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @Column(name = "TEST_DATE")
+    private Date testDate;
 
-    protected UserEntity user;
-
-    public UserEntity getUser() {
-        return user;
+    public Date getTestDate() {
+        return testDate;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setTestDate(Date testDate) {
+        this.testDate = testDate;
     }
-    */
-    /*
-    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "POSITION_ID")
-    private StaffEntity staff;
-
-    public StaffEntity getStaff() {
-        return staff;
-    }
-
-    public void setStaff(StaffEntity staff) {
-        this.staff = staff;
-    }
-    */
 
     @Override
     public boolean equals(Object o) {

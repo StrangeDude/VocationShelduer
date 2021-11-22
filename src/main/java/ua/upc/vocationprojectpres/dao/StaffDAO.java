@@ -8,6 +8,10 @@ public interface StaffDAO {
 
     StaffEntity getStaff(int id);
 
+    StaffEntity getStaff();
+
     List<StaffEntity> getStaffList();
+
+    List<StaffEntity> getStaffFromDepartment(String departmentName);
 
 }
