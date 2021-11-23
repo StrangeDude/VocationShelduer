@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="UserView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.upc.vocationprojectpres.gui.controller.UsersController">
+   <children>
+      <TabPane layoutY="47.0" prefHeight="533.0" prefWidth="687.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="47.0">
+         <tabs>
+            <Tab text="Active">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutY="48.0" prefHeight="469.0" prefWidth="692.0">
+                           <content>
+                              <TableView prefHeight="468.0" prefWidth="689.0">
+                                 <columns>
+                                    <TableColumn fx:id="activeNameColumn" editable="false" minWidth="-1.0" prefWidth="290.0" resizable="false" text="Name" />
+                                    <TableColumn fx:id="activeDepartamentColumn" editable="false" minWidth="-1.0" prefWidth="230.0" resizable="false" text="Departament" />
+                                    <TableColumn fx:id="activeRoleColumn" editable="false" minWidth="-1.0" prefWidth="170.0" resizable="false" text="Role" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                        <TextField fx:id="activeSearchFIeld" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="255.0" promptText="Search users" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Inactive">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutY="48.0" prefHeight="469.0" prefWidth="692.0">
+                           <content>
+                              <TableView prefHeight="468.0" prefWidth="689.0">
+                                 <columns>
+                                    <TableColumn fx:id="inactiveNameColumn" editable="false" minWidth="-1.0" prefWidth="290.0" resizable="false" text="Name" />
+                                    <TableColumn fx:id="inactiveDepartamentColumn" editable="false" minWidth="-1.0" prefWidth="230.0" resizable="false" text="Departament" />
+                                    <TableColumn fx:id="inactiveRoleColumn" editable="false" minWidth="-1.0" prefWidth="170.0" resizable="false" text="Role" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                        <TextField fx:id="inactiveSearchFIeld" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="255.0" promptText="Search users" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Label layoutX="14.0" layoutY="9.0" text="Users">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

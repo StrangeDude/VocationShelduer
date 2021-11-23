@@ -1,0 +1,8 @@
+.event-bar {
+    -fx-background-color: green;
+}
+
+.event-bar:requested:left {
+    -fx-background-radius: 3px 0px 0px 3px;
+    -fx-background-color: green;
+}
