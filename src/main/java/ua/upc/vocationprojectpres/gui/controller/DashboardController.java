@@ -54,7 +54,7 @@ public class DashboardController implements MenuController {
 
 
 
-    private void loadRquest(Vocation vocation) {
+    private void loadRequest(Vocation vocation) {
 
         FXMLLoader loader = new FXMLLoader(getClass().
                 getResource("/view/menu/view-extension/pending-requests.fxml"));
@@ -78,7 +78,7 @@ public class DashboardController implements MenuController {
         System.out.println(parent.getId());
         parent.managedProperty().bind(parent.visibleProperty());
         parent.setVisible(false);
-        //TODO disapire animation
+        //TODO disappear animation
         this.requestVBox.getChildren();
     }
 

@@ -25,6 +25,4 @@ module ua.upc.vocationprojectpres {
     exports ua.upc.vocationprojectpres.model;
     opens ua.upc.vocationprojectpres.model to javafx.fxml, javafx.base;
 
-    exports ua.upc.vocationprojectpres.test;
-    opens ua.upc.vocationprojectpres.test to javafx.fxml, javafx.base;
 }

@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ProgressBarTableCell;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import ua.upc.vocationprojectpres.gui.control.DayColumn;
@@ -108,7 +109,6 @@ public class CalendarController implements MenuController {
 
             dayColumn.setCellFactory(cell -> {
                 TableCell<User, User> dayCell = new TableCell<>();
-                /*dayCell.getStyleClass().add("day-cell");*/
                 dayCell.itemProperty().addListener((obs, old, newVal) -> {
                     if (newVal != null) {
                         dayCell.graphicProperty().bind(Bindings.when(dayCell.emptyProperty()).then((StackPane) null).otherwise((StackPane) null));
@@ -201,6 +201,7 @@ public class CalendarController implements MenuController {
             monthColumn.getColumns().clear();
         }
         monthColumn.getColumns().addAll(dayColumns.subList(0,currentDate.get().lengthOfMonth()));
+
     }
 
     private void prevMonthButtonClicked(ActionEvent event) {
